@@ -1,11 +1,12 @@
 import React from 'react';
-import { Grid, Paper, Typography, Button, Box } from '@mui/material';
+import { Grid, Paper, Typography,Button, Box } from '@mui/material';
 import { Draggable, Droppable  } from '@hello-pangea/dnd';
+//import CustomButton from '../styles/customButton';
 
 const TaskColumn = ({ columnId, title, tasks, onEdit,onUpdateTasks }) => {
   return (
     <Grid item xs={12} md={3}>
-      <Typography variant="h6">{title}</Typography>
+      <Typography variant="h7" style={{ fontFamily: 'Open Sans' }}>{title}</Typography>
       <Droppable droppableId={columnId}>
         {(provided) => (
           <Paper

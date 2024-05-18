@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Grid, Button, Typography, Box, IconButton } from '@mui/material';
+import { Container, Grid, Typography, Box, IconButton } from '@mui/material';
 import TaskColumn from '../components/TaskColumn';
 import TaskForm from '../components/TaskForm';
 import { DragDropContext } from '@hello-pangea/dnd';
 import EditIcon from '../assets/EditIcon.png';
+import CustomButton from '../styles/customButton';
 
 const initialTasks = {
   pending: [],
@@ -84,25 +85,27 @@ const ViewProyect = () => {
     }
   };
 
+  
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Container>
-        <Grid container spacing={2} alignItems="center" justifyContent="space-between">
+      <Container >
+        <Grid container spacing={2} alignItems="center" justifyContent="space-between" mt = {2}>
           <Grid item >
             <Box display="flex" alignItems="center">
-              <Typography variant="h4">Project Name</Typography>
+              <Typography variant="h5" style={{ fontFamily: 'Open Sans' }}>Project Name</Typography>
               <IconButton style={{ marginLeft: '8px' }}>
                 <img src={EditIcon} alt="Edit" style={{ width: '24px', height: '24px' }} />
               </IconButton>
             </Box>
           </Grid>
           <Grid item>
-            <Button variant="contained" color="secondary">Asignar</Button>
+            <CustomButton variant="contained" color="secondary">Asignar</CustomButton>
           </Grid>
         </Grid>
 
         <Box mt={4}>
-          <Typography variant="h5" style = {{ marginBottom: '16px'}}>Tareas</Typography>
+          <Typography variant="h6" style = {{ marginBottom: '16px', fontFamily: 'Open Sans'}}>Tareas</Typography>
           <Grid container spacing={2} justifyContent="space-between">
             <TaskColumn
               columnId="pending"
@@ -136,7 +139,7 @@ const ViewProyect = () => {
         </Box>
 
         <Box mt={4}>
-          <Button variant="contained" onClick={() => openForm()}>Agregar</Button>
+          <CustomButton variant="contained" onClick={() => openForm()} >Agregar</CustomButton>
         </Box>
 
         {isFormOpen && (
