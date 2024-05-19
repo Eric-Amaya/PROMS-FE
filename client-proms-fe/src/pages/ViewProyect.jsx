@@ -131,8 +131,8 @@ const ViewProyect = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Container >
-        <Grid container spacing={2} alignItems="center" justifyContent="space-between" mt = {2}>
+      <Container maxWidth= 'lg' >
+        <Grid container spacing={2} alignItems="center" justifyContent="space-between">
           <Grid item >
             <Box display="flex" alignItems="center">
               <Typography variant="h5" style={{ fontFamily: 'Open Sans' }}>Project Name</Typography>
