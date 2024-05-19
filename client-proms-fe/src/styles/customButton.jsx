@@ -1,8 +1,7 @@
-// CustomButton.jsx
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 
-const CustomButton = ({ children, ...props }) => {
+const CustomButton = ({ children,icon,  ...props }) => {
   return (
     <Button 
       {...props}
@@ -11,9 +10,14 @@ const CustomButton = ({ children, ...props }) => {
         color: '#FFFFFF',
         '&:hover': {
           backgroundColor: '#0b3b62',
-        }
+        },
+        display: 'flex',
+        alignItems: 'center',
       }}
       style={{ fontFamily: 'Open Sans' }}
+      startIcon={icon ? 
+        <IconButton sx={{ color: '#FFFFFF'}}>{icon}</IconButton> 
+      : null}
     >
       {children}
     </Button>

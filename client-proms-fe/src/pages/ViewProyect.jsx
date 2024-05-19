@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Container, Grid, Typography, Box, IconButton } from '@mui/material';
-import TaskColumn from '../components/TaskColumn';
-import TaskForm from '../components/TaskForm';
+import { Container, Grid, Typography, Box, IconButton , Button, Dialog, DialogTitle, DialogActions} from '@mui/material';
+import TaskColumn from '../components/ViewProyect-Page/TaskColumn';
+import TaskForm from '../components/ViewProyect-Page/TaskForm';
 import { DragDropContext } from '@hello-pangea/dnd';
-import EditIcon from '../assets/EditIcon.png';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import SettingsIcon from '@mui/icons-material/Settings';
 import CustomButton from '../styles/customButton';
 
 const initialTasks = {
@@ -17,6 +19,8 @@ const ViewProyect = () => {
   const [tasks, setTasks] = useState(initialTasks);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const openForm = (task = null) => {
     setSelectedTask(task);
@@ -50,6 +54,44 @@ const ViewProyect = () => {
       ),
     }));
     closeForm();
+  };
+
+  const handleDeleteTask = (task) => {
+    if (task) {
+      setTaskToDelete(task);
+      setOpenDeleteDialog(true);
+    }
+  };
+  
+  const handleConfirmDelete = () => {
+    if (taskToDelete) {
+      const { columnId } = findTaskColumn(taskToDelete.id);
+      const updatedTasks = tasks[columnId].filter((task) => task.id !== taskToDelete.id);
+      setTasks((prevTasks) => ({
+        ...prevTasks,
+        [columnId]: updatedTasks,
+      }));
+      setTaskToDelete(null);
+      setOpenDeleteDialog(false);
+    }
+  };
+  
+  // Función para encontrar la columna de una tarea basada en su ID
+  const findTaskColumn = (taskId) => {
+    for (const columnId in tasks) {
+      const taskIndex = tasks[columnId].findIndex((task) => task.id === taskId);
+      if (taskIndex !== -1) {
+        return { columnId, taskIndex };
+      }
+    }
+    return null;
+  };
+  
+  
+  
+  const handleCancelDelete = () => {
+    setTaskToDelete(null);
+    setOpenDeleteDialog(false);
   };
 
   const onDragEnd = (result) => {
@@ -95,12 +137,12 @@ const ViewProyect = () => {
             <Box display="flex" alignItems="center">
               <Typography variant="h5" style={{ fontFamily: 'Open Sans' }}>Project Name</Typography>
               <IconButton style={{ marginLeft: '8px' }}>
-                <img src={EditIcon} alt="Edit" style={{ width: '24px', height: '24px' }} />
+                <EditIcon />
               </IconButton>
             </Box>
           </Grid>
           <Grid item>
-            <CustomButton variant="contained" color="secondary">Asignar</CustomButton>
+            <CustomButton variant="contained" color="secondary" icon = {<SettingsIcon />} >Configurar</CustomButton>
           </Grid>
         </Grid>
 
@@ -112,6 +154,7 @@ const ViewProyect = () => {
               title="Pendientes"
               tasks={tasks.pending}
               onEdit={openForm}
+              onDelete = {handleDeleteTask}
               onUpdateTasks={(newTasks) => setTasks((prevTasks) => ({ ...prevTasks, pending: newTasks }))}
             />
             <TaskColumn
@@ -119,6 +162,7 @@ const ViewProyect = () => {
               title="En proceso"
               tasks={tasks.inProgress}
               onEdit={openForm}
+              onDelete = {handleDeleteTask}
               onUpdateTasks={(newTasks) => setTasks((prevTasks) => ({ ...prevTasks, inProgress: newTasks }))}
             />
             <TaskColumn
@@ -126,6 +170,7 @@ const ViewProyect = () => {
               title="En revisión"
               tasks={tasks.review}
               onEdit={openForm}
+              onDelete = {handleDeleteTask}
               onUpdateTasks={(newTasks) => setTasks((prevTasks) => ({ ...prevTasks, review: newTasks }))}
             />
             <TaskColumn
@@ -133,13 +178,14 @@ const ViewProyect = () => {
               title="Completadas"
               tasks={tasks.completed}
               onEdit={openForm}
+              onDelete = {handleDeleteTask}
               onUpdateTasks={(newTasks) => setTasks((prevTasks) => ({ ...prevTasks, completed: newTasks }))}
             />
           </Grid>
         </Box>
 
         <Box mt={4}>
-          <CustomButton variant="contained" onClick={() => openForm()} >Agregar</CustomButton>
+          <CustomButton variant="contained" onClick={() => openForm()} icon = {<AddIcon />} >Agregar</CustomButton>
         </Box>
 
         {isFormOpen && (
@@ -149,6 +195,13 @@ const ViewProyect = () => {
             onSave={selectedTask ? updateTask : addTask}
           />
         )}
+        <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>
+          <DialogTitle>¿Estás seguro de que deseas eliminar {taskToDelete ? taskToDelete.title : ''}"?</DialogTitle>
+          <DialogActions>
+            <Button onClick={handleConfirmDelete} color="error">Confirmar</Button>
+            <Button onClick={handleCancelDelete}>Cancelar</Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </DragDropContext>
   );
