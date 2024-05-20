@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Drawer, Box, TextField, Typography, Grid, Select, MenuItem, InputLabel, InputAdornment, IconButton } from '@mui/material';
-import CustomButton from '../../styles/customButton';
+import CustomButton from './customButton';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close'; 
-import { taskFormSchema } from '../../validation/task-form-schema';
+import { taskFormSchema } from '../../../validation/task-form-schema';
 import * as Yup from 'yup';
 
 const TaskForm = ({ task, onClose, onSave }) => {
@@ -99,11 +99,13 @@ const TaskForm = ({ task, onClose, onSave }) => {
   };
 
   return (
-    <Drawer anchor="right" open ModalProps={{ disableBackdropClick: true }}>
-      <Box width={400} p={2} onMouseDown={handleContainerMouseDown}>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Drawer anchor="right" open ModalProps={{ disableBackdropClick: true }} >
+      <Box width={400} p={2} onMouseDown={handleContainerMouseDown} >
+        <Box display="flex" justifyContent="space-between" alignItems="center" >
           <Typography variant="h6" style={{ marginBottom: '12px', fontFamily: 'Open Sans' }}>{task ? 'Editar Tarea' : 'Agregar Tarea'}</Typography>
-          <IconButton onClick={handleClose}><CloseIcon /></IconButton> {/* Botón de cerrar */}
+          <IconButton onClick={handleClose} sx={{ marginTop: -2 }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={12} >

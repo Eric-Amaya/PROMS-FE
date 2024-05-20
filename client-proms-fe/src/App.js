@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Box, Toolbar } from '@mui/material';
-import ViewProyect from './pages/ViewProyect';
+import { Box } from '@mui/material';
 import Home from './pages/Home';
 import Sidebar from './components/Sidebar';
+import CustomToolbar from './components/CustomToolbar';
+import ViewTask from './pages/ViewTask';
+import Image from "./assets/avatar.png"
 
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -17,6 +19,8 @@ function App() {
     console.log('Cerrando sesión...');
   };
 
+  const userImage = Image;
+
   return (
     <BrowserRouter>
       <Box sx={{ display: 'flex' }}>
@@ -27,12 +31,22 @@ function App() {
         />
         <Box
           component="main"
-          sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+          sx={{ flexGrow: 1, bgcolor: 'background.default'}}
         >
-          <Toolbar />
+          <CustomToolbar pageTitle="PROMS" color = "#003057" userName = "Bastián Egaña" userImage={userImage}/>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/view" element={<ViewProyect />} />
+            <Route path="/profile" element={<Home />} />
+            <Route path="/view" element={<ViewTask />} />
+            <Route path="/view/task" element={<ViewTask />} />
+            <Route path="/view/schedule" element={<ViewTask />} />
+            <Route path="/view/resource" element={<ViewTask />} />
+            <Route path="/view/participants" element={<ViewTask />} />
+            <Route path="/view/progress" element={<ViewTask />} />
+            <Route path="/view/performance" element={<ViewTask />} />
+            <Route path="/view/document" element={<ViewTask />} />
+            <Route path="/view/version" element={<ViewTask />} />
+            <Route path="/view/setting" element={<ViewTask />} />
           </Routes>
         </Box>
       </Box>

@@ -21,7 +21,6 @@ const Sidebar = ({ onLogout, isCollapsed, toggleDrawer }) => {
         [`& .MuiDrawer-paper`]: {
           width: isCollapsed ? collapsedWidth : drawerWidth,
           boxSizing: 'border-box',
-          transition: 'width 0.3s',
           backgroundColor: '#003057',
           backgroundImage: `url(${SidebarBackground})`, 
           backgroundSize: 'cover',
@@ -37,7 +36,6 @@ const Sidebar = ({ onLogout, isCollapsed, toggleDrawer }) => {
           onClick={toggleDrawer}
           sx={{
             margin: isCollapsed ? '8px auto' : '8px 8px 8px auto',
-            transition: 'margin 0.3s',
             color: '#fff'
           }}
         >

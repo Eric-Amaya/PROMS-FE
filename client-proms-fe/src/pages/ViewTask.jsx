@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Grid, Typography, Box, IconButton , Button, Dialog, DialogTitle, DialogActions} from '@mui/material';
-import TaskColumn from '../components/ViewProyect-Page/TaskColumn';
-import TaskForm from '../components/ViewProyect-Page/TaskForm';
+import TaskColumn from '../components/ViewProyect-Page/ViewTask/TaskColumn';
+import TaskForm from '../components/ViewProyect-Page/ViewTask/TaskForm';
 import { DragDropContext } from '@hello-pangea/dnd';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import SettingsIcon from '@mui/icons-material/Settings';
-import CustomButton from '../styles/customButton';
+import CustomButton from '../components/ViewProyect-Page/ViewTask/customButton';
+import MenuProject from '../components/ViewProyect-Page/MenuProject';
 
 const initialTasks = {
   pending: [],
@@ -15,7 +15,7 @@ const initialTasks = {
   completed: [],
 };
 
-const ViewProyect = () => {
+const ViewTask = () => {
   const [tasks, setTasks] = useState(initialTasks);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -127,11 +127,10 @@ const ViewProyect = () => {
     }
   };
 
-  
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Container maxWidth= 'lg' >
+      <MenuProject/>
+      <Container maxWidth= 'lg' style={{ paddingTop: '32px' }}>
         <Grid container spacing={2} alignItems="center" justifyContent="space-between">
           <Grid item >
             <Box display="flex" alignItems="center">
@@ -140,9 +139,6 @@ const ViewProyect = () => {
                 <EditIcon />
               </IconButton>
             </Box>
-          </Grid>
-          <Grid item>
-            <CustomButton variant="contained" color="secondary" icon = {<SettingsIcon />} >Configurar</CustomButton>
           </Grid>
         </Grid>
 
@@ -207,4 +203,4 @@ const ViewProyect = () => {
   );
 };
 
-export default ViewProyect;
+export default ViewTask;
