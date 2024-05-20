@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, Typography, Box, IconButton , Button, Dialog, DialogTitle, DialogActions} from '@mui/material';
+import { Grid, Typography, Box, IconButton , Button, Dialog, DialogTitle, DialogActions} from '@mui/material';
 import TaskColumn from '../components/ViewProyect-Page/ViewTask/TaskColumn';
 import TaskForm from '../components/ViewProyect-Page/ViewTask/TaskForm';
 import { DragDropContext } from '@hello-pangea/dnd';
@@ -129,8 +129,8 @@ const ViewTask = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <MenuProject/>
-      <Container maxWidth= 'lg' style={{ paddingTop: '32px' }}>
+      <MenuProject projectName={"Project Name"}/>
+      <div style={{ padding: '128px', paddingTop: '32px'}}>
         <Grid container spacing={2} alignItems="center" justifyContent="space-between">
           <Grid item >
             <Box display="flex" alignItems="center">
@@ -192,13 +192,13 @@ const ViewTask = () => {
           />
         )}
         <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>
-          <DialogTitle>¿Estás seguro de que deseas eliminar {taskToDelete ? taskToDelete.title : ''}"?</DialogTitle>
+          <DialogTitle>¿Estás seguro de que deseas eliminar {taskToDelete ? taskToDelete.title : ''}?</DialogTitle>
           <DialogActions>
             <Button onClick={handleConfirmDelete} color="error">Confirmar</Button>
             <Button onClick={handleCancelDelete}>Cancelar</Button>
           </DialogActions>
         </Dialog>
-      </Container>
+      </div>
     </DragDropContext>
   );
 };

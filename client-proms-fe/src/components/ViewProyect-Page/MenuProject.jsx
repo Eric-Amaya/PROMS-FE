@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Box } from '@mui/material';
+import { AppBar, Toolbar, Box, Typography } from '@mui/material';
 import CronogramasIcon from '@mui/icons-material/CalendarToday';
 import RecursosIcon from '@mui/icons-material/GroupWork';
 import ParticipantesIcon from '@mui/icons-material/People';
@@ -12,21 +12,25 @@ import HistoryIcon from '@mui/icons-material/History';
 
 import ButtonMenu from './ButtonMenu';
 
-const MenuProject
- = () => {
+const MenuProject = ({ projectName }) => {
   return (
-    <AppBar position="sticky" sx = {{backgroundColor : "#0b3b62", height: '60px'}} >
+    <AppBar position="sticky" sx={{ backgroundColor: "#0b3b62", height: '60px' }}>
       <Toolbar style={{ top: 0 }}>
-        <Box display="flex" flexGrow={1} justifyContent="space-between">
-            <ButtonMenu icon={TaskIcon} label="Tareas" to = "/view/task"/>
-            <ButtonMenu icon={CronogramasIcon} label="Cronogramas" to = "/view/schedule"/>
-            <ButtonMenu icon={RecursosIcon} label="Recursos" to = "/view/resource"/>
-            <ButtonMenu icon={ParticipantesIcon} label="Participantes" to = "/view/participants"/>
-            <ButtonMenu icon={ProgresoIcon} label="Progreso" to = "/view/progress"/>
-            <ButtonMenu icon={RendimientoIcon} label="Rendimiento" to = "/view/performance"/>
-            <ButtonMenu icon={DocumentosIcon} label="Documentos" to = "/view/document"/>
-            <ButtonMenu icon={HistoryIcon} label="Versiones" to = "/view/version"/>
-            <ButtonMenu icon={SettingsIcon} label="Configuración" to = "/view/setting"/>
+        <Box display="flex" flexGrow={1} alignItems="center">
+          <Typography variant="h6" sx={{ marginRight: '50px', color: 'white' }}>
+            {projectName}
+          </Typography>
+          <Box display="flex" flexGrow={1} justifyContent="space-between">
+            <ButtonMenu icon={TaskIcon} label="Tareas" to="/view/task" />
+            <ButtonMenu icon={CronogramasIcon} label="Cronogramas" to="/view/schedule" />
+            <ButtonMenu icon={RecursosIcon} label="Recursos" to="/view/resource" />
+            <ButtonMenu icon={ParticipantesIcon} label="Participantes" to="/view/participants" />
+            <ButtonMenu icon={ProgresoIcon} label="Progreso" to="/view/progress" />
+            <ButtonMenu icon={RendimientoIcon} label="Rendimiento" to="/view/performance" />
+            <ButtonMenu icon={DocumentosIcon} label="Documentos" to="/view/document" />
+            <ButtonMenu icon={HistoryIcon} label="Versiones" to="/view/version" />
+            <ButtonMenu icon={SettingsIcon} label="Configuración" to="/view/setting" />
+          </Box>
         </Box>
       </Toolbar>
     </AppBar>
