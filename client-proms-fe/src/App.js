@@ -1,13 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Box } from '@mui/material';
 import Home from './pages/Home';
+import Sidebar from './components/Sidebar';
+import CustomToolbar from './components/CustomToolbar';
+import ViewTask from './pages/ViewTask';
+import Image from "./assets/avatar.png"
 
 function App() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const handleLogout = () => {
+    // Lógica para cerrar sesión
+    console.log('Cerrando sesión...');
+  };
+
+  const userImage = Image;
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path = "/" element = {<Home/>}/>
-      </Routes>
+      <Box sx={{ display: 'flex' }}>
+        <Sidebar 
+          onLogout={handleLogout} 
+          isCollapsed={isCollapsed} 
+          toggleDrawer={toggleDrawer} 
+        />
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, bgcolor: 'background.default'}}
+        >
+          <CustomToolbar pageTitle="PROMS" color = "#003057" userName = "Bastián Egaña" userImage={userImage}/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Home />} />
+            <Route path="/view" element={<ViewTask />} />
+            <Route path="/view/task" element={<ViewTask />} />
+            <Route path="/view/schedule" element={<ViewTask />} />
+            <Route path="/view/resource" element={<ViewTask />} />
+            <Route path="/view/participants" element={<ViewTask />} />
+            <Route path="/view/progress" element={<ViewTask />} />
+            <Route path="/view/performance" element={<ViewTask />} />
+            <Route path="/view/document" element={<ViewTask />} />
+            <Route path="/view/version" element={<ViewTask />} />
+            <Route path="/view/setting" element={<ViewTask />} />
+          </Routes>
+        </Box>
+      </Box>
     </BrowserRouter>
   );
 }
