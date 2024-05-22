@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MenuProject from '../components/ViewProyect-Page/MenuProject';
 import SearchParticipants from '../components/ViewProyect-Page/ViewParticipants/searchParticipants';
 import ParticipantList from '../components/ViewProyect-Page/ViewParticipants/ParticipantsList';
@@ -17,16 +17,19 @@ const ViewParticipants = () => {
     const [teamToEdit, setTeamToEdit] = useState(null);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [teamToDelete, setTeamToDelete] = useState(null);
-    //const [participantToDelete, setParticipantToDelete] = useState(null);
+    const [openDeleteParticipant, setOpenDeleteParticipant] = useState(false);
+    const [participantToDelete, setParticipantToDelete] = useState(null);
 
     const handleAddParticipant = (participant) => {
         setParticipants((prevParticipants) => [...prevParticipants, participant]);
     };
 
-    const handleRemoveParticipant = (index) => {
+    const handleRemoveParticipant = () => {
         setParticipants((prevParticipants) => 
-            prevParticipants.filter((_, i) => i !== index)
+            prevParticipants.filter((participant) => participant !== participantToDelete)
         );
+        setOpenDeleteParticipant(false);
+        setParticipantToDelete(null);
     };
 
     const handleAddTeam = (team) => {
@@ -59,10 +62,16 @@ const ViewParticipants = () => {
         setSelectedTeam(team);
     };
 
+    useEffect(() => {
+        if (selectedTeam && !teams.some(team => team.id === selectedTeam.id)) {
+            setSelectedTeam(null);
+        }
+    }, [teams, selectedTeam]);
+
     return (
         <div>
             <MenuProject projectName={"Project Name"} />
-            <Grid container spacing={2} style={{ paddingTop: '32px' }}>
+            <Grid container spacing={2} style={{ padding: '16px',paddingTop: '32px' }}>
                 <Grid item xs={12} md={6}>
                     <Box padding={2}>
                         <SearchParticipants onAddParticipant={handleAddParticipant} />
@@ -71,7 +80,10 @@ const ViewParticipants = () => {
                         </Typography>
                         <ParticipantList 
                             participants={participants} 
-                            onRemoveParticipant={handleRemoveParticipant} 
+                            onRemoveParticipant={(participant) => {
+                                setParticipantToDelete(participant);
+                                setOpenDeleteParticipant(true);
+                            }} 
                         />
                         <CustomButton
                             variant="contained"
@@ -84,6 +96,9 @@ const ViewParticipants = () => {
                 <Grid item xs={12} md={6}>
                     <Grid container direction="column" spacing={2}>
                         <Grid item>
+                            <Typography variant="h6" sx={{ marginTop: '10px',fontFamily: 'Open Sans' }}>
+                                Equipos
+                            </Typography>
                             <TeamList 
                                 teams={teams} 
                                 onSelectTeam={handleSelectTeam} 
@@ -101,7 +116,15 @@ const ViewParticipants = () => {
                 </Grid>
             </Grid>
 
-            <Dialog open={isCreateTeamOpen} onClose={handleCloseCreateTeam}>
+            <ConfirmDialog
+                open = {openDeleteParticipant}
+                onClose = {() => setOpenDeleteParticipant(false)}
+                onConfirm={handleRemoveParticipant}
+                title="Confirmar eliminación"
+                description={`¿Estás seguro de que deseas eliminar al participante ${participantToDelete ? participantToDelete.name : ''}?`}
+            />                
+
+            <Dialog open={isCreateTeamOpen} onClose={handleCloseCreateTeam} >
                 <DialogTitle>{teamToEdit ? 'Editar Equipo' : 'Crear Equipo'}</DialogTitle>
                 <DialogContent>
                     <CreateTeam 

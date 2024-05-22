@@ -8,7 +8,7 @@ const TeamDetail = ({ team }) => {
         <Box>
             <Typography variant="h6">{team.name}</Typography>
             <Typography variant="subtitle1">Tipo: {team.type}</Typography>
-            <Typography variant="subtitle1">Participantes:</Typography>
+            <Typography variant="h7">Participantes</Typography>
             <List>
                 {team.participants.map((participant, index) => (
                     <ListItem key={index}>

@@ -1,22 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { List, ListItem, ListItemText, IconButton, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ConfirmDialog from './ConfirmDialog';
 
 const ParticipantList = ({ participants, onRemoveParticipant }) => {
-    const [participantToDelete, setParticipantToDelete] = useState(null); 
-    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-
-    const handleOpenDeleteDialog = (participant) => {
-        setParticipantToDelete(participant); 
-        setOpenDeleteDialog(true); 
-    };
-
-    const handleDeleteParticipant = () => {
-        onRemoveParticipant(participantToDelete.index); 
-        setOpenDeleteDialog(false); 
-        setParticipantToDelete(null); 
-    };
 
     return (
         <Box paddingTop="12px" 
@@ -39,20 +25,13 @@ const ParticipantList = ({ participants, onRemoveParticipant }) => {
                         />
                         <IconButton 
                             edge="end" 
-                            onClick={() => handleOpenDeleteDialog({ index })} // Configura el participante a eliminar en el estado y abre el diálogo de confirmación
+                            onClick={() => onRemoveParticipant(participant)} 
                         >
                             <DeleteIcon />
                         </IconButton>
                     </ListItem>
                 ))}
             </List>
-            <ConfirmDialog
-                open={openDeleteDialog}
-                onClose={() => setOpenDeleteDialog(false)}
-                onConfirm={handleDeleteParticipant}
-                title="Confirmar eliminación"
-                description={`¿Estás seguro de que deseas eliminar al participante?`}
-            />
         </Box>
     );
 };
