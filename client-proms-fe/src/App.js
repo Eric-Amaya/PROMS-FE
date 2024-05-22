@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Sidebar from './components/Sidebar';
 import CustomToolbar from './components/CustomToolbar';
 import ViewTask from './pages/ViewTask';
+import ViewSchedule from './pages/ViewSchedule';
+import ViewParticipants from './pages/ViewParticipants';
 import Image from "./assets/avatar.png"
 
 function App() {
@@ -39,9 +41,9 @@ function App() {
             <Route path="/profile" element={<Home />} />
             <Route path="/view" element={<ViewTask />} />
             <Route path="/view/task" element={<ViewTask />} />
-            <Route path="/view/schedule" element={<ViewTask />} />
+            <Route path="/view/schedule" element={<ViewSchedule />} />
             <Route path="/view/resource" element={<ViewTask />} />
-            <Route path="/view/participants" element={<ViewTask />} />
+            <Route path="/view/participants" element={<ViewParticipants />} />
             <Route path="/view/progress" element={<ViewTask />} />
             <Route path="/view/performance" element={<ViewTask />} />
             <Route path="/view/document" element={<ViewTask />} />

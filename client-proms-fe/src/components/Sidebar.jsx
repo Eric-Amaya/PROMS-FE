@@ -48,7 +48,7 @@ const Sidebar = ({ onLogout, isCollapsed, toggleDrawer }) => {
             </ListItemIcon>
             {!isCollapsed && <ListItemText primary="Inicio" sx={{ color: '#fff' }} />}
           </ListItemButton>
-          <ListItemButton onClick={onLogout} sx={{ backgroundColor: 'transparent', '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.1)' } }}>
+          <ListItemButton onClick={onLogout} sx={{ marginTop : 'auto' ,backgroundColor: 'transparent', '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.1)' } }}>
             <ListItemIcon>
               <ExitToAppIcon sx={{ color: '#fff', marginLeft: '9px' }} />
             </ListItemIcon>
