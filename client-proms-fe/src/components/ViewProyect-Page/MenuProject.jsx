@@ -3,12 +3,10 @@ import { AppBar, Toolbar, Box, Typography, IconButton, Menu, MenuItem } from '@m
 import CronogramasIcon from '@mui/icons-material/CalendarToday';
 import RecursosIcon from '@mui/icons-material/GroupWork';
 import ParticipantesIcon from '@mui/icons-material/People';
-import ProgresoIcon from '@mui/icons-material/Timeline';
 import RendimientoIcon from '@mui/icons-material/TrendingUp';
 import DocumentosIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TaskIcon from '@mui/icons-material/Assignment';
-import HistoryIcon from '@mui/icons-material/History';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import ButtonMenu from './ButtonMenu';
@@ -50,16 +48,10 @@ const MenuProject = ({ projectName }) => {
                 <ButtonMenu icon={ParticipantesIcon} label="Participantes" to="/view/participants"/>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <ButtonMenu icon={ProgresoIcon} label="Progreso" to="/view/progress" />
-              </MenuItem>
-              <MenuItem onClick={handleMenuClose}>
                 <ButtonMenu icon={RendimientoIcon} label="Rendimiento" to="/view/performance"/>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <ButtonMenu icon={DocumentosIcon} label="Documentos" to="/view/document"/>
-              </MenuItem>
-              <MenuItem onClick={handleMenuClose}>
-                <ButtonMenu icon={HistoryIcon} label="Versiones" to="/view/version" />
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <ButtonMenu icon={SettingsIcon} label="Configuración" to="/view/setting" />
@@ -79,10 +71,8 @@ const MenuProject = ({ projectName }) => {
             <ButtonMenu icon={CronogramasIcon} label="Cronogramas" to="/view/schedule" />
             <ButtonMenu icon={RecursosIcon} label="Recursos" to="/view/resource" />
             <ButtonMenu icon={ParticipantesIcon} label="Participantes" to="/view/participants" />
-            <ButtonMenu icon={ProgresoIcon} label="Progreso" to="/view/progress" />
             <ButtonMenu icon={RendimientoIcon} label="Rendimiento" to="/view/performance" />
             <ButtonMenu icon={DocumentosIcon} label="Documentos" to="/view/document" />
-            <ButtonMenu icon={HistoryIcon} label="Versiones" to="/view/version" />
             <ButtonMenu icon={SettingsIcon} label="Configuración" to="/view/setting" />
     
           </Box>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Avatar } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Typography, Avatar, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const CustomToolbar = ({ pageTitle, color, userName, userImage}) => {
+const CustomToolbar = ({ pageImg, color, userName, userImage}) => {
 
   return (
     <AppBar 
@@ -14,9 +14,13 @@ const CustomToolbar = ({ pageTitle, color, userName, userImage}) => {
       <Toolbar>
         <Link to= "/" style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton edge="start" color="inherit" aria-label="menu">
-            <Typography variant="h6" component="div">
-                {pageTitle}
-            </Typography>
+            <Box
+              component= "img"
+              src = {pageImg}
+              alt = "Logo"
+              sx={{ height: '48px' }}
+            >    
+            </Box>
             </IconButton>
         </Link>
         <div style={{ flexGrow: 1 }} />

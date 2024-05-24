@@ -8,6 +8,7 @@ import ViewTask from './pages/ViewTask';
 import ViewSchedule from './pages/ViewSchedule';
 import ViewParticipants from './pages/ViewParticipants';
 import Image from "./assets/avatar.png"
+import LogoImage from "./assets/Logo_Image.png"
 
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -35,7 +36,7 @@ function App() {
           component="main"
           sx={{ flexGrow: 1, bgcolor: 'background.default'}}
         >
-          <CustomToolbar pageTitle="PROMS" color = "#003057" userName = "Bastián Egaña" userImage={userImage}/>
+          <CustomToolbar pageImg= {LogoImage} color = "#003057" userName = "Bastián Egaña" userImage={userImage}/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Home />} />
@@ -44,10 +45,8 @@ function App() {
             <Route path="/view/schedule" element={<ViewSchedule />} />
             <Route path="/view/resource" element={<ViewTask />} />
             <Route path="/view/participants" element={<ViewParticipants />} />
-            <Route path="/view/progress" element={<ViewTask />} />
             <Route path="/view/performance" element={<ViewTask />} />
             <Route path="/view/document" element={<ViewTask />} />
-            <Route path="/view/version" element={<ViewTask />} />
             <Route path="/view/setting" element={<ViewTask />} />
           </Routes>
         </Box>
